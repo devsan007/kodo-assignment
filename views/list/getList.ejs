@@ -1,0 +1,103 @@
+<%- include('../includes/header.ejs') %>
+<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+</head>
+<style>
+    body {
+      font-family: Arial;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    form.example input[type=text] {
+      padding: 10px;
+      font-size: 17px;
+      border: 1px solid grey;
+      float: left;
+      width: 80%;
+      background: #f1f1f1;
+    }
+    
+    form.example button {
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: #2196F3;
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    
+    form.example button:hover {
+      background: #0b7dda;
+    }
+    
+    form.example::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    </style>
+<body>
+
+<%- include('../includes/navigation.ejs') %>
+<div class="container"> <div class="ticker"> <div class="title"></div> <marquee class="news-content"> <h3> Sanjay Kumar Das - das.sanjaysk@gmail.com (Nodejs,AWS) , Exp : 4year 6 months</h3> </marquee> </div> </div>
+<form class="example" action="/list/search" method="POST">
+    <input type="text" placeholder="Search.." name="searchVal" value="<%= (searchedText) ? searchedText : '' %>" id="customeSearch">
+    <button type="submit" id="srchbtn"><i class="fa fa-search"></i></button>
+</form>
+</br>
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>image</th>
+            <th>description</th>
+            <th>dateLastEdited</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let item of dataList){ %>
+            <tr>
+                <td><%= item.name %></td>
+                <td><%= item.image %></td>
+                <td><%= item.description %></td>
+                <td><%= item.dateLastEdited %></td>
+            </tr>
+        <% } %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>image</th>
+            <th>description</th>
+            <th>dateLastEdited</th>
+        </tr>
+    </tfoot>
+</table>
+
+<script>
+    $(document).ready(function () {
+
+            var dataTable = $('#example').DataTable({
+                /* search: {
+                    return: true,
+                }, */
+                /* processing: true,
+                serverSide: true, */
+                //serverMethod: 'post',
+                searching: false,
+                rowReorder: true,
+                columnDefs: [
+                    { orderable: true, className: 'reorder', targets: [0,3] },
+                    { orderable: false, targets: '_all' }
+                ],
+                
+            });
+    });
+</script>
+
+<%- include('../includes/footer.ejs') %>
