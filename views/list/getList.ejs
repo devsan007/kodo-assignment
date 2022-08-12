@@ -44,7 +44,7 @@
 <body>
 
 <%- include('../includes/navigation.ejs') %>
-<div class="container"> <div class="ticker"> <div class="title"></div> <marquee class="news-content"> <h3> Sanjay Kumar Das - das.sanjaysk@gmail.com (Nodejs,AWS) , Exp : 4year 6 months</h3> </marquee> </div> </div>
+<div class="container"> <div class="ticker"> <div class="title"></div> <marquee class="news-content"> <h3> Sanjay Kumar Das - das.sanjaysk@gmail.com</h3> </marquee> </div> </div>
 <form class="example" action="/list/search" method="POST">
     <input type="text" placeholder="Search.." name="searchVal" value="<%= (searchedText) ? searchedText : '' %>" id="customeSearch">
     <button type="submit" id="srchbtn"><i class="fa fa-search"></i></button>
