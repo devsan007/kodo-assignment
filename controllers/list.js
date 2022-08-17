@@ -1,6 +1,7 @@
 const dataList = require("../util/mock-data.json");
 
 exports.getList = (req, res, next) => {
+    console.log("req : ",req);
     res.render('list/getList',{
         dataList : dataList,
         pageTitle : 'Data list',
@@ -10,7 +11,7 @@ exports.getList = (req, res, next) => {
 };
 
 exports.searchList = (req, res, next) => {
-    console.log("req body : ",req.body);
+    //console.log("req body : ",req.body);
     let reqParam = req.body;
     let searchedText = '';
     let searchVal = '';
@@ -39,19 +40,30 @@ exports.searchList = (req, res, next) => {
                 }
             });
         }
-        res.render('list/getList',{
-            dataList : filteredList,
-            pageTitle : 'Data list',
-            pagePath : '/list/getList',
-            searchedText : (filteredList.length > 0) ? searchedText : ''
-        });
+
+        if(req && req.isTest){
+            return filteredList;
+        }else{
+            res.render('list/getList',{
+                dataList : filteredList,
+                pageTitle : 'Data list',
+                pagePath : '/list/getList',
+                searchedText : (filteredList.length > 0) ? searchedText : ''
+            });
+        }
+
+        
     }else{
-        res.render('list/getList',{
-            dataList : dataList,
-            pageTitle : 'Data list',
-            pagePath : '/list/getList',
-            searchedText : ''
-        });
+        if(req && req.isTest){
+            return dataList;
+        }else{
+            res.render('list/getList',{
+                dataList : dataList,
+                pageTitle : 'Data list',
+                pagePath : '/list/getList',
+                searchedText : ''
+            });
+        }
     }
     
 };
